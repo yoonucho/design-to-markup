@@ -1,0 +1,47 @@
+/* src/styles/_mixins.scss */
+
+// --- Variables ---
+$pc-body-max: 1100px; // 본문 콘텐츠 최대 너비
+$mo-body-max: 430px; // 모바일 콘텐츠 최대 너비
+$breakpoint: 768px; // 모바일 전환점
+
+// --- Mixins ---
+
+// 1. Container: 본문 콘텐츠 중앙 정렬 및 너비 제한
+@mixin container {
+  width: 100%;
+  max-width: $pc-body-max;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  @media (max-width: $breakpoint) {
+    max-width: $mo-body-max;
+    padding: 0 20px;
+  }
+}
+
+// 2. Section Base: 섹션별 상하 간격
+@mixin section-padding {
+  width: 100%;
+  padding-top: 120px;
+}
+
+// 3. Flex Utilities (가로/세로 중앙 정렬)
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-col {
+  // 세로 방향 정렬
+  display: flex;
+  flex-direction: column;
+}
+
+// 4. Mobile Only (반응형 분기용)
+@mixin mobile {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
