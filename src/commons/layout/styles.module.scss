@@ -1,0 +1,56 @@
+@import '@/styles/_mixins.scss';
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(56px + 130px) 0 130px;
+}
+
+.sectionSlot {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionSlot > * {
+  width: 100%;
+}
+
+/* 섹션이 없을 경우 표시되는 빈 상태 */
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  min-height: 320px;
+  padding: 32px;
+  border: 1px dashed var(--color-wireframe-border);
+  background-color: var(--color-wireframe-bg);
+  border-radius: 12px;
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+/* 모바일 환경 스타일 */
+@include mobile {
+  .main {
+    padding: calc(72px + 80px) 0 80px;
+  }
+
+  .emptyState {
+    min-height: 240px;
+    padding: 24px;
+    font-size: 1.4rem;
+  }
+}
