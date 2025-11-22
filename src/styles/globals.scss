@@ -96,11 +96,12 @@ video {
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
+  font: inherit;
+  color: inherit;
+  border: none;
   appearance: none;
-  /* background-image: url("/assets/images/arrow-down.svg"); */
-  background-repeat: no-repeat;
-  background-position: 98% 50%;
-  background-size: 20px 20px;
+  cursor: pointer;
+  outline: none;
 }
 
 /* 웹 접근성 관련 스타일 */
@@ -114,4 +115,27 @@ select {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  padding: 12px 24px;
+  background-color: #111111;
+  color: #ffffff;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  z-index: 999;
+  opacity: 0;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+
+  &:focus-visible {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
