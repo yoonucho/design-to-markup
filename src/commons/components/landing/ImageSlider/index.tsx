@@ -1,9 +1,4 @@
-import { useRef, useState } from 'react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Carousel, SlideCard } from '@/commons/components/ui/ImageSlider';
 import styles from './styles.module.scss';
 
 const IMAGE_SLIDER_CONTENT = {
@@ -68,10 +63,6 @@ const SLIDER_ITEMS = [
 ];
 
 export const ImageSlider = () => {
-  const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
-
   return (
     <section className={styles.section} aria-labelledby='card-heading'>
       <div className={styles.inner}>
@@ -86,73 +77,32 @@ export const ImageSlider = () => {
           </p>
         </header>
 
-        <div className={styles.carouselWrapper}>
-          <button
-            ref={prevRef}
-            type='button'
-            className='swiper-button-prev' // Use Swiper's default class for styling
-            aria-label='이전 슬라이드'
-          />
-
-          <Swiper
-            className={styles.swiper}
-            modules={[Navigation, Pagination]}
-            spaceBetween={16}
-            slidesPerView={1.2}
-            loop={true}
-            centeredSlides={false}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            pagination={{
-              el: paginationEl,
-              clickable: true,
-              bulletClass: 'swiper-pagination-bullet',
-              bulletActiveClass: 'swiper-pagination-bullet-active',
-            }}
-            breakpoints={{
-              768: {
-                slidesPerView: 2.5,
-              },
-            }}
-            onBeforeInit={(swiper) => {
-              // Assign navigation elements explicitly before initialization
-              if (typeof swiper.params.navigation !== 'boolean') {
-                // @ts-ignore
-                swiper.params.navigation.prevEl = prevRef.current;
-                // @ts-ignore
-                swiper.params.navigation.nextEl = nextRef.current;
-              }
-            }}
-          >
-            {SLIDER_ITEMS.map((item) => (
-              <SwiperSlide key={item.id} className={styles.card}>
-                <div className={styles.imageWrapper}>
-                  <img src={item.imageSrc} alt={item.imageAlt} loading='lazy' />
-                </div>
-                <div className={styles.cardBody}>
-                  <p className={styles.cardHeading}>{item.title}</p>
-                  <div className={styles.cardDescription}>
-                    {item.description.map((line, index) => (
-                      <p key={`${item.id}-desc-${index}`}>{line}</p>
-                    ))}
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          <button
-            ref={nextRef}
-            type='button'
-            className='swiper-button-next' // Use Swiper's default class for styling
-            aria-label='다음 슬라이드'
-          />
-
-          {/* Use callback ref to update state when element is mounted */}
-          <div ref={setPaginationEl} className={styles.pagination} />
-        </div>
+        <Carousel
+          spaceBetween={16}
+          slidesPerView={1.2}
+          loop={true}
+          navigation={true}
+          pagination={true}
+          breakpoints={{
+            768: {
+              slidesPerView: 2.5,
+            },
+          }}
+          navigationColor='#485c11'
+          paginationColor='#485c11'
+          equalHeight={true}
+        >
+          {SLIDER_ITEMS.map((item) => (
+            <SlideCard key={item.id} imageSrc={item.imageSrc} imageAlt={item.imageAlt}>
+              <p className={styles.cardHeading}>{item.title}</p>
+              <div className={styles.cardDescription}>
+                {item.description.map((line, index) => (
+                  <p key={`${item.id}-desc-${index}`}>{line}</p>
+                ))}
+              </div>
+            </SlideCard>
+          ))}
+        </Carousel>
       </div>
     </section>
   );
