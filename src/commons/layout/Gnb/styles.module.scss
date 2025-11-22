@@ -3,9 +3,15 @@
 $header-height: 56px;
 
 .header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   padding: 0 24px;
-  background-color: #ffffff;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
@@ -41,7 +47,6 @@ $header-height: 56px;
   align-items: center;
   gap: 27px;
   padding: 0 24px;
-  backdrop-filter: blur(15px);
 }
 
 .menuItem a {

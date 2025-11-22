@@ -1,5 +1,7 @@
 @import '@/styles/_mixins.scss';
 
+$gnb-height: 56px;
+
 .wrapper {
   min-height: 100vh;
   display: flex;
@@ -13,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 130px 0 0;
+  padding-top: calc(130px + $gnb-height);
 }
 
 .sectionSlot {

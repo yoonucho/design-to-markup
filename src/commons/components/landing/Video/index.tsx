@@ -3,21 +3,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/commons/components/landing/Video/styles.module.scss';
 import { PlayButton } from '@/commons/components/ui/PlayButton';
+import { VIDEO_CONTENT, VIDEO_SOURCE } from '@/commons/constants/globalConstants';
 import {
   VIDEO_SECTION_COVER_MOBILE_SRC,
   VIDEO_SECTION_COVER_SRC,
 } from '@/commons/constants/images';
-
-const VIDEO_CONTENT = {
-  title: '테스트용 영상 단락',
-  description: [
-    '면접 과제용으로 제작된 샘플 영상 단락입니다.',
-    '사용자가 해당 단락이 화면에 보일 경우 영상이 재생되게 구현하세요.',
-  ],
-  videoLabel: 'AI Bio-Supercom Center 홍보 영상',
-} as const;
-
-const VIDEO_SOURCE = '/video/main.mp4';
 
 export const Video = () => {
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);

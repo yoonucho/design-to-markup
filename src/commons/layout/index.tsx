@@ -1,4 +1,5 @@
 import { SkipLink } from '@/commons/components/ui/SkipLink';
+import { SECTION_LABELS } from '@/commons/constants/globalConstants';
 import Gnb from '@/commons/layout/Gnb';
 import styles from '@/commons/layout/styles.module.scss';
 import { Children, ReactNode } from 'react';
@@ -6,13 +7,6 @@ import { Children, ReactNode } from 'react';
 interface LayoutProps {
   children: ReactNode;
 }
-
-const SECTION_LABELS = [
-  'Hero Section',
-  'Video Section',
-  'Image Tab Section',
-  'Image Slider Section',
-];
 
 export default function Layout({ children }: LayoutProps) {
   const sectionChildren = Children.toArray(children);
