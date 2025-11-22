@@ -17,7 +17,7 @@ export const HERO_DEVICE_IMAGE_SRC = '/images/hero-image.png';
 /**
  * 랜딩 히어로 섹션 모바일용 이미지 경로.
  */
-export const HERO_DEVICE_IMAGE_MOBILE_SRC = '/images/mo/hero_image-m.png';
+export const HERO_DEVICE_IMAGE_MOBILE_SRC = '/images/mo/hero-image-m.png';
 
 /**
  * 랜딩 비디오 섹션 PC용 비디오 커버 이미지 경로.
@@ -28,3 +28,13 @@ export const VIDEO_SECTION_COVER_SRC = '/images/video-cover.png';
  * 랜딩 비디오 섹션 모바일용 비디오 커버 이미지 경로.
  */
 export const VIDEO_SECTION_COVER_MOBILE_SRC = '/images/mo/video-cover-m.png';
+
+/**
+ * 랜딩 페이지 이미지 탭 전용 정적 자산 경로.
+ * 피그마 시안 기반 이미지 세트를 하나의 객체로 묶어 관리한다.
+ */
+export const IMAGE_TAB_SOURCES = {
+  AREA_ONE: '/images/Image-tab1.png',
+  AREA_TWO: '/images/Image-tab2.png',
+  AREA_THREE: '/images/Image-tab3.png',
+} as const;

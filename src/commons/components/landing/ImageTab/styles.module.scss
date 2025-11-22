@@ -1,0 +1,169 @@
+@import '@/styles/_mixins.scss';
+
+.section {
+  @include section-padding;
+  padding-bottom: 120px;
+  background-color: #ffffff;
+}
+
+.inner {
+  @include container;
+  @include flex-col;
+  align-items: center;
+  gap: 80px;
+  text-align: center;
+}
+
+.header {
+  @include flex-col;
+  gap: 24px;
+  max-width: 70.2rem;
+}
+
+.title {
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.144rem;
+  color: #000000;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  color: #6f6f6f;
+  letter-spacing: -0.009rem;
+  white-space: pre-line;
+}
+
+.tabNavigation {
+  width: 100%;
+  max-width: 70.2rem;
+}
+
+.tabList {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 6.9rem;
+  border-bottom: 0.2rem solid #929292;
+  gap: 0;
+}
+
+.tabItem {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  border-bottom: 0.45rem solid transparent;
+  transition: border-color 0.2s ease;
+
+  &:focus-visible {
+    outline: 0.2rem solid #485c11;
+    outline-offset: 0.6rem;
+  }
+}
+
+.tabButton {
+  width: 100%;
+  padding-bottom: 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.088rem;
+  color: #929292;
+}
+
+.active {
+  border-bottom-color: #485c11;
+
+  .tabButton {
+    color: #485c11;
+  }
+}
+
+.panel {
+  width: 100%;
+  max-width: 89.2rem;
+}
+
+.figure {
+  width: 100%;
+  margin: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 62rem;
+  border-radius: 3rem;
+  overflow: hidden;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+@include mobile {
+  .inner {
+    gap: 48px;
+  }
+
+  .title {
+    font-size: 3.6rem;
+  }
+
+  .subtitle {
+    font-size: 1.6rem;
+  }
+
+  .tabNavigation {
+    max-width: 100%;
+  }
+
+  .tabList {
+    flex-direction: column;
+    align-items: stretch;
+    border-bottom: none;
+    height: auto;
+    gap: 12px;
+  }
+
+  .tabItem {
+    border-bottom: none;
+    border-left: 0.45rem solid transparent;
+    padding-left: 1.2rem;
+    justify-content: flex-start;
+
+    &:focus-visible {
+      outline-offset: 0.4rem;
+    }
+  }
+
+  .tabButton {
+    text-align: left;
+    padding-bottom: 0.8rem;
+  }
+
+  .active {
+    border-left-color: #485c11;
+  }
+
+  .panel {
+    max-width: 100%;
+  }
+
+  .imageWrapper {
+    height: 32rem;
+    border-radius: 2rem;
+  }
+}
+
