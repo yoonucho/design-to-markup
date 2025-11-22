@@ -4,8 +4,10 @@
  */
 export const LOGO_IMAGE_SRC = '/images/logo.svg';
 
+export const HERO_DEVICE_IMAGE_SRC = '/images/hero-image.png';
+export const HERO_DEVICE_IMAGE_MOBILE_SRC = '/images/hero-image-mobile.png';
+
 /**
  * 언어 선택 셀렉트에서 사용하는 언어 아이콘 경로.
  */
 export const LANGUAGE_ICON_SRC = '/icons/language-icon.svg';
-
