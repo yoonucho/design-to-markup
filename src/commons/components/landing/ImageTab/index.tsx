@@ -1,5 +1,8 @@
+import { KeyboardEvent } from 'react';
+
 import styles from '@/commons/components/landing/ImageTab/styles.module.scss';
 import { IMAGE_TAB_SOURCES } from '@/commons/constants/images';
+import { useImageTab } from '@/commons/hooks/useImageTab';
 
 type ImageTabContent = {
   id: string;
@@ -8,7 +11,7 @@ type ImageTabContent = {
   caption: string;
 };
 
-const SECTION_COPY = {
+const IMAGE_TAB_CONTENT = {
   title: '테스트용 탭 영역 단락 입니다',
   description: `면접 과제용으로 제작된 샘플 탭 단락입니다.\n인터렉션, 코드 구조등을 자유롭게 구현하세요.`,
 };
@@ -34,17 +37,34 @@ const TAB_LIST: ImageTabContent[] = [
   },
 ];
 
-export const ImageTab = () => {
-  const activeTab = TAB_LIST[0];
+const handleKeyDown =
+  (onClick: (id: string) => void, tabId: string) => (event: KeyboardEvent<HTMLLIElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onClick(tabId);
+    }
+  };
+
+export interface ImageTabProps {
+  defaultActiveTabId?: string;
+  onTabChange?: (id: string) => void;
+}
+
+export const ImageTab = ({ defaultActiveTabId = 'tab1', onTabChange }: ImageTabProps) => {
+  const { activeTabId, onClickTab } = useImageTab({
+    initialActiveTabId: defaultActiveTabId,
+    onChange: onTabChange,
+  });
+  const activeTab = TAB_LIST.find((tab) => tab.id === activeTabId) ?? TAB_LIST[0];
 
   return (
     <section className={styles.section} aria-labelledby='image-tab-heading'>
       <div className={styles.inner}>
         <header className={styles.header}>
           <h2 id='image-tab-heading' className={styles.title}>
-            {SECTION_COPY.title}
+            {IMAGE_TAB_CONTENT.title}
           </h2>
-          <p className={styles.subtitle}>{SECTION_COPY.description}</p>
+          <p className={styles.subtitle}>{IMAGE_TAB_CONTENT.description}</p>
         </header>
 
         <div className={styles.tabNavigation}>
@@ -60,6 +80,8 @@ export const ImageTab = () => {
                   aria-controls={`panel-${tab.id}`}
                   id={`tab-${tab.id}`}
                   tabIndex={isActive ? 0 : -1}
+                  onClick={() => onClickTab(tab.id)}
+                  onKeyDown={handleKeyDown(onClickTab, tab.id)}
                 >
                   <button type='button' className={styles.tabButton} tabIndex={-1}>
                     {tab.label}
