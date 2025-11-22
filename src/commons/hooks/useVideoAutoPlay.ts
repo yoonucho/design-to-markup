@@ -5,6 +5,8 @@ interface UseVideoAutoPlayOptions {
   threshold?: number;
   /** 자동 재생 활성화 여부 */
   enabled?: boolean;
+  /** rootMargin: intersection 감지 기준 늘리기 */
+  rootMargin?: string;
 }
 
 /**
@@ -14,36 +16,56 @@ interface UseVideoAutoPlayOptions {
 export const useVideoAutoPlay = ({
   threshold = 0.5,
   enabled = true,
+  rootMargin = '0px',
 }: UseVideoAutoPlayOptions = {}) => {
   const [shouldAutoPlay, setShouldAutoPlay] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false); // useState로 변경
   const sectionRef = useRef<HTMLElement | null>(null);
-  const hasPlayedRef = useRef(false); // 한 번만 자동 재생
 
   useEffect(() => {
-    if (!enabled || !sectionRef.current) return;
+    console.log('🎬 useVideoAutoPlay init:', {
+      enabled,
+      hasRef: !!sectionRef.current,
+      hasPlayed,
+      shouldAutoPlay,
+    });
+
+    if (!enabled || !sectionRef.current || hasPlayed) {
+      console.log('❌ Not starting observer - enabled:', enabled, 'hasRef:', !!sectionRef.current, 'hasPlayed:', hasPlayed);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          console.log('👀 Intersection:', {
+            isIntersecting: entry.isIntersecting,
+            hasPlayed,
+            intersectionRatio: entry.intersectionRatio,
+          });
+
           // 섹션이 뷰포트에 들어오고, 아직 자동 재생하지 않았을 때
-          if (entry.isIntersecting && !hasPlayedRef.current) {
+          if (entry.isIntersecting && !hasPlayed) {
+            console.log('✅ Triggering autoplay!');
             setShouldAutoPlay(true);
-            hasPlayedRef.current = true;
+            setHasPlayed(true);
           }
         });
       },
       {
         threshold,
-        rootMargin: '0px',
+        rootMargin,
       }
     );
 
+    console.log('📍 Starting observer with threshold:', threshold);
     observer.observe(sectionRef.current);
 
     return () => {
+      console.log('🛑 Disconnecting observer');
       observer.disconnect();
     };
-  }, [threshold, enabled]);
+  }, [threshold, enabled, hasPlayed]);
 
   return {
     sectionRef,
