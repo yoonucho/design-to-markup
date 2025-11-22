@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
-
-const LOGIN_NOTICE_MESSAGE = '로그인 기능은 현재 준비 중입니다.';
+import { LOGIN_NOTICE_MESSAGE } from '@/commons/constants/globalConstants';
 
 export interface UseLoginNoticeResult {
   loginStatusMessage: string;

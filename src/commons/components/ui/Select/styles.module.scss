@@ -10,7 +10,7 @@
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 1.7rem;
-  background-color: #ffffff;
+  background: none;
   outline: none;
   transition:
     border-color 0.2s ease,
@@ -101,7 +101,7 @@
 }
 
 .variant-primary {
-  background-color: #ffffff;
+  background-color: inherit;
   color: #6f6f6f;
 }
 

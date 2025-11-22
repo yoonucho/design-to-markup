@@ -54,7 +54,7 @@ export const ImageTab = ({ defaultActiveTabId = 'tab1', onTabChange }: ImageTabP
   const activeTab = DEMO_TABS.find((tab) => tab.id === activeTabId) ?? DEMO_TABS[0];
 
   return (
-    <section className={styles.section} aria-labelledby='ui-image-tab-heading'>
+    <section id='image-tab' className={styles.section} aria-labelledby='ui-image-tab-heading'>
       <div className={styles.inner}>
         <div className={styles.tabNavigation}>
           <ul className={styles.tabList} role='tablist' aria-label='이미지 탭 전환'>

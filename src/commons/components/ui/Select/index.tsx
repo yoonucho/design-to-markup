@@ -1,4 +1,5 @@
 import styles from '@/commons/components/ui/Select/styles.module.scss';
+import type { SelectOption } from '@/commons/constants/types';
 import clsx from 'clsx';
 import {
   ChangeEvent,
@@ -11,11 +12,6 @@ import {
   useRef,
   useState,
 } from 'react';
-
-export interface SelectOption {
-  value: string;
-  label: string;
-}
 
 type SelectVariant = 'primary' | 'secondary' | 'tertiary';
 type SelectSize = 'small' | 'medium' | 'large';

@@ -3,29 +3,40 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/commons/components/landing/Video/styles.module.scss';
 import { PlayButton } from '@/commons/components/ui/PlayButton';
+import { VIDEO_CONTENT, VIDEO_SOURCE } from '@/commons/constants/globalConstants';
 import {
   VIDEO_SECTION_COVER_MOBILE_SRC,
   VIDEO_SECTION_COVER_SRC,
 } from '@/commons/constants/images';
-
-const VIDEO_CONTENT = {
-  title: '테스트용 영상 단락',
-  description: [
-    '면접 과제용으로 제작된 샘플 영상 단락입니다.',
-    '사용자가 해당 단락이 화면에 보일 경우 영상이 재생되게 구현하세요.',
-  ],
-  videoLabel: 'AI Bio-Supercom Center 홍보 영상',
-} as const;
-
-const VIDEO_SOURCE = '/video/main.mp4';
+import { useVideoAutoPlay } from '@/commons/hooks/useVideoAutoPlay';
 
 export const Video = () => {
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const hasAutoPlayedRef = useRef(false); // 자동 재생 여부 추적
+
+  // 스크롤 시 자동 재생 감지
+  const { sectionRef, shouldAutoPlay } = useVideoAutoPlay({
+    threshold: 0.5, // 섹션의 50%가 보일 때 활성화
+    enabled: true,
+  });
 
   const handleActivatePlayer = useCallback(() => {
     setIsPlayerVisible(true);
   }, []);
+
+  // 비디오 종료 시 플레이어 숨기기 (커버 이미지로 복원)
+  const handleVideoEnded = useCallback(() => {
+    setIsPlayerVisible(false);
+  }, []);
+
+  // 스크롤로 섹션 진입 시 자동 재생 (한 번만)
+  useEffect(() => {
+    if (shouldAutoPlay && !isPlayerVisible && !hasAutoPlayedRef.current) {
+      setIsPlayerVisible(true);
+      hasAutoPlayedRef.current = true; // 자동 재생 완료 표시
+    }
+  }, [shouldAutoPlay, isPlayerVisible]);
 
   useEffect(() => {
     if (isPlayerVisible && videoRef.current) {
@@ -35,7 +46,7 @@ export const Video = () => {
   }, [isPlayerVisible]);
 
   return (
-    <section id='video' className={styles.section} aria-labelledby='video-heading'>
+    <section id='video' ref={sectionRef} className={styles.section} aria-labelledby='video-heading'>
       <div className={styles.inner}>
         <header className={styles.textGroup}>
           <h2 id='video-heading' className={styles.title}>
@@ -59,6 +70,7 @@ export const Video = () => {
                 playsInline
                 preload='auto'
                 controls
+                onEnded={handleVideoEnded}
               />
             ) : (
               <>
