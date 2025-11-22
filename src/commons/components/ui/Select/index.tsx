@@ -106,6 +106,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const variantClass = styles[`variant-${variant}`] ?? styles['variant-primary'];
     const sizeClass = styles[`size-${size}`] ?? styles['size-medium'];
     const isDisabled = Boolean(rest.disabled);
+    const hasIcon = Boolean(iconSrc);
 
     return (
       <div
@@ -114,7 +115,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           styles.wrapper,
           variantClass,
           sizeClass,
-          { [styles.disabled]: isDisabled },
+          {
+            [styles.disabled]: isDisabled,
+            [styles.noIcon]: !hasIcon,
+          },
           wrapperClassName,
         )}
         data-open={isFieldActive || undefined}

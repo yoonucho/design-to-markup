@@ -27,6 +27,12 @@
   }
 }
 
+/* 아이콘이 없는 경우 중앙 정렬 */
+.noIcon {
+  display: flex;
+  justify-content: center;
+}
+
 .icon {
   display: inline-flex;
   align-items: center;
