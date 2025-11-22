@@ -1,9 +1,10 @@
-import HEAD from 'next/head';
+import { Hero } from '@/commons/components/landing/Hero';
+import Head from 'next/head';
 
 export default function Home() {
   return (
     <>
-      <HEAD>
+      <Head>
         {/* 1. 제목 설정 */}
         <title>[조윤우] 신테카바이오 면접과제 프로젝트</title>
 
@@ -23,7 +24,9 @@ export default function Home() {
         <meta property='og:image' content='/images/og-image.png' />
         <meta property='og:image:width' content='1200' />
         <meta property='og:image:height' content='630' />
-      </HEAD>
+      </Head>
+      {/* 섹션 조립 */}
+      <Hero />
     </>
   );
 }
