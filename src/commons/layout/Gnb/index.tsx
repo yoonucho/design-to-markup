@@ -3,11 +3,16 @@ import { Select } from '@/commons/components/ui/Select';
 import { LANGUAGE_OPTIONS, NAV_ITEMS } from '@/commons/constants/globalConstants';
 import { LANGUAGE_ICON_SRC, LOGO_IMAGE_SRC } from '@/commons/constants/images';
 import { useLoginNotice } from '@/commons/hooks/useLoginNotice';
+import { useScrollSpy } from '@/commons/hooks/useScrollSpy';
 import styles from '@/commons/layout/Gnb/styles.module.scss';
 import Link from 'next/link';
 
 export default function Gnb() {
   const { loginStatusMessage, handleLoginClick } = useLoginNotice();
+  const activeSection = useScrollSpy({
+    sectionIds: NAV_ITEMS.map((item) => item.id),
+    offset: 80, // GNB 높이 + 여유 공간
+  });
 
   return (
     <header className={styles.header}>
@@ -18,11 +23,19 @@ export default function Gnb() {
           </Link>
 
           <ul className={styles.menu} role='list'>
-            {NAV_ITEMS.map((item) => (
-              <li key={item.id} className={styles.menuItem}>
-                <a href={`#${item.id}`}>{item.label}</a>
-              </li>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <li
+                  key={item.id}
+                  className={`${styles.menuItem} ${isActive ? styles.active : ''}`}
+                >
+                  <a href={`#${item.id}`} aria-current={isActive ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
