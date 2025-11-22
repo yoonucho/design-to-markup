@@ -1,0 +1,78 @@
+@import '@/styles/_mixins.scss';
+
+.section {
+  @include section-padding;
+  display: flex;
+  justify-content: center;
+  background-color: #dfecc6;
+  overflow-x: clip; // 슬라이더가 넘칠 때 가로 스크롤 방지
+}
+
+.inner {
+  @include container;
+  @include flex-col;
+  align-items: center;
+  gap: 80px;
+  padding-top: 130px;
+}
+
+.header {
+  @include flex-col;
+  gap: 16px;
+  text-align: center;
+  color: #485c11;
+}
+
+.title {
+  font-size: 4.8rem;
+  line-height: 0.95;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  color: rgba(72, 92, 17, 0.7);
+
+  span {
+    display: block;
+  }
+}
+
+// Carousel 래퍼는 이제 범용 컴포넌트에서 처리
+
+.cardHeading {
+  font-size: 22px;
+  line-height: 1.05;
+  font-weight: 700;
+  color: #485c11;
+}
+
+.cardDescription {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #6f6f6f;
+  opacity: 0.8;
+
+  p {
+    margin: 0;
+  }
+
+  p + p {
+    margin-top: 4px;
+  }
+}
+
+@include mobile {
+  .inner {
+    gap: 48px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+}

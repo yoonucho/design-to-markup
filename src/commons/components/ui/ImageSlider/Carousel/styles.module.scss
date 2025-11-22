@@ -1,0 +1,107 @@
+@import '@/styles/_mixins.scss';
+
+.carouselWrapper {
+  width: 100%;
+  position: relative;
+  padding: 0 60px;
+
+  // CSS 변수 기본값
+  --navigation-color: #000000;
+  --pagination-color: #000000;
+
+  // Swiper 내비게이션 커스터마이징
+  :global(.swiper-button-prev),
+  :global(.swiper-button-next) {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 10;
+
+    // 흰색 원형 배경
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+
+    // 버튼 그림자
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+    svg {
+      width: 24px;
+      height: 24px;
+      color: var(--navigation-color);
+    }
+
+    // 비활성화 상태
+    &.swiper-button-disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  :global(.swiper-button-prev) {
+    left: -70px;
+  }
+
+  :global(.swiper-button-next) {
+    right: -70px;
+  }
+}
+
+.swiper {
+  width: 100%;
+  padding-bottom: 50px;
+  overflow: visible;
+}
+
+// 동일 높이 옵션
+.equalHeight {
+  :global(.swiper-wrapper) {
+    align-items: stretch;
+  }
+}
+
+.equalHeightSlide {
+  height: auto;
+  display: flex;
+
+  // 슬라이드 내부 컨텐츠가 전체 높이를 차지하도록
+  > * {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// 커스텀 페이지네이션 스타일
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+
+  // Swiper 페이지네이션 인디케이터 타겟팅
+  :global(.swiper-pagination-bullet) {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--pagination-color);
+    background-color: transparent;
+    opacity: 1;
+    margin: 0 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background-color: var(--pagination-color);
+  }
+}
+
+@include mobile {
+  .carouselWrapper {
+    padding: 0;
+  }
+}
