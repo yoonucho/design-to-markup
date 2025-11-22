@@ -1,4 +1,5 @@
 import { Hero } from '@/commons/components/landing/Hero';
+import { Video } from '@/commons/components/landing/Video';
 import Head from 'next/head';
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
       </Head>
       {/* 섹션 조립 */}
       <Hero />
+      <Video />
     </>
   );
 }
