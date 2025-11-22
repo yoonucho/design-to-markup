@@ -7,6 +7,8 @@ const meta = {
   component: PlayButton,
   args: {
     srLabel: '영상 재생',
+    size: 'small',
+    showCircle: false,
     'aria-pressed': false,
   },
   parameters: {
@@ -19,6 +21,15 @@ const meta = {
       ],
     },
   },
+  argTypes: {
+    size: {
+      control: 'radio',
+      options: ['small', 'medium', 'large'],
+    },
+    showCircle: {
+      control: 'boolean',
+    },
+  },
 } satisfies Meta<PlayButtonProps>;
 
 export default meta;
@@ -29,6 +40,30 @@ export const Default: Story = {};
 export const LightBackground: Story = {
   parameters: {
     backgrounds: { default: 'light' },
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: 'small',
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    size: 'medium',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: 'large',
+  },
+};
+
+export const WithCircle: Story = {
+  args: {
+    showCircle: true,
   },
 };
 

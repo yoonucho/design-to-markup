@@ -4,18 +4,35 @@ import { ButtonHTMLAttributes, forwardRef } from 'react';
 import styles from './styles.module.scss';
 
 const TRIANGLE_PATH =
-  'M63.1526 45.3495C65.8193 46.8891 65.8193 50.7381 63.1526 52.2777L43.4238 63.6681C40.7571 65.2077 37.4238 63.2832 37.4238 60.204L37.4238 37.4231C37.4238 34.3439 40.7571 32.4194 43.4238 33.959L63.1526 45.3495Z';
+  'M25.7288 11.9323C28.3955 13.4719 28.3955 17.3209 25.7288 18.8605L6 30.251C3.33333 31.7906 0 29.8661 0 26.7869L0 4.006C0 0.926794 3.33334 -0.997701 6.00001 0.541899L25.7288 11.9323Z';
+
+type PlayButtonSize = 'small' | 'medium' | 'large';
 
 export interface PlayButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   srLabel?: string;
+  size?: PlayButtonSize;
+  showCircle?: boolean;
 }
 
 export const PlayButton = forwardRef<HTMLButtonElement, PlayButtonProps>(
-  ({ className, srLabel = '재생', type = 'button', ...props }, ref) => (
-    <button ref={ref} type={type} className={clsx(styles.button, className)} {...props}>
+  (
+    { className, srLabel = '재생', type = 'button', size = 'small', showCircle = false, ...props },
+    ref,
+  ) => (
+    <button
+      ref={ref}
+      type={type}
+      className={clsx(
+        styles.button,
+        showCircle ? styles.withCircle : styles[`size-${size}`],
+        className,
+      )}
+      {...props}
+    >
+      {showCircle ? <span className={styles.circle} aria-hidden='true' /> : null}
       <svg
-        className={styles.icon}
-        viewBox='0 0 96 96'
+        className={clsx(styles.icon, showCircle ? styles.iconWithCircle : undefined)}
+        viewBox='0 0 28 31'
         role='img'
         aria-hidden='true'
         focusable='false'

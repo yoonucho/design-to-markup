@@ -75,10 +75,12 @@ export const Video = () => {
                   />
                 </picture>
                 <PlayButton
+                  size='small'
                   className={styles.playButton}
                   aria-controls='promo-video'
                   onClick={handleActivatePlayer}
                   srLabel='영상 재생'
+                  showCircle
                 />
               </>
             )}
