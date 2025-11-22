@@ -94,8 +94,7 @@ export const ImageTab = ({ defaultActiveTabId = 'tab1', onTabChange }: ImageTabP
               <div className={styles.imageOverlay} aria-hidden='true' />
             </div>
             <figcaption className={styles.caption}>
-              <strong>{activeTab.title}</strong>
-              <span>{activeTab.description}</span>
+              <strong>{activeTab.caption}</strong>
             </figcaption>
           </figure>
         </section>
