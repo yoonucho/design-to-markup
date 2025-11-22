@@ -66,30 +66,6 @@
   display: block;
 }
 
-.playButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  background: rgba(217, 217, 217, 0.5);
-  @include flex-center;
-  transition: opacity 0.3s ease;
-}
-
-.playButtonHidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-// .playIcon {
-//   width: 32px;
-//   height: 32px;
-//   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5));
-// }
-
 @include mobile {
   .inner {
     gap: 40px;
@@ -106,10 +82,5 @@
 
   .playerFrame {
     border-radius: 18px;
-  }
-
-  .playButton {
-    width: 72px;
-    height: 72px;
   }
 }

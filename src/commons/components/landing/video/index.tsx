@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/commons/components/landing/Video/styles.module.scss';
+import { PlayButton } from '@/commons/components/ui/PlayButton';
 import {
   VIDEO_SECTION_COVER_MOBILE_SRC,
   VIDEO_SECTION_COVER_SRC,
@@ -73,20 +74,12 @@ export const Video = () => {
                     loading='lazy'
                   />
                 </picture>
-                <button
-                  type='button'
+                <PlayButton
                   className={styles.playButton}
                   aria-controls='promo-video'
                   onClick={handleActivatePlayer}
-                >
-                  <img
-                    src='/icons/play-icon.svg'
-                    alt=''
-                    aria-hidden='true'
-                    className={styles.playIcon}
-                  />
-                  <span className='sr-only'>영상 재생</span>
-                </button>
+                  srLabel='영상 재생'
+                />
               </>
             )}
           </figure>
