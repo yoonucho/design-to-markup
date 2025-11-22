@@ -1,22 +1,18 @@
 import { KeyboardEvent } from 'react';
 
-import styles from '@/commons/components/landing/ImageTab/styles.module.scss';
 import { IMAGE_TAB_SOURCES } from '@/commons/constants/images';
 import { useImageTab } from '@/commons/hooks/useImageTab';
 
-type ImageTabContent = {
+import styles from './styles.module.scss';
+
+type DemoTab = {
   id: string;
   label: string;
   imageSrc: string;
   caption: string;
 };
 
-const IMAGE_TAB_CONTENT = {
-  title: '테스트용 탭 영역 단락 입니다',
-  description: `면접 과제용으로 제작된 샘플 탭 단락입니다.\n인터렉션, 코드 구조등을 자유롭게 구현하세요.`,
-};
-
-const TAB_LIST: ImageTabContent[] = [
+const DEMO_TABS: DemoTab[] = [
   {
     id: 'tab1',
     label: '탭 영역 1',
@@ -55,22 +51,15 @@ export const ImageTab = ({ defaultActiveTabId = 'tab1', onTabChange }: ImageTabP
     initialActiveTabId: defaultActiveTabId,
     onChange: onTabChange,
   });
-  const activeTab = TAB_LIST.find((tab) => tab.id === activeTabId) ?? TAB_LIST[0];
+  const activeTab = DEMO_TABS.find((tab) => tab.id === activeTabId) ?? DEMO_TABS[0];
 
   return (
-    <section className={styles.section} aria-labelledby='image-tab-heading'>
+    <section className={styles.section} aria-labelledby='ui-image-tab-heading'>
       <div className={styles.inner}>
-        <header className={styles.header}>
-          <h2 id='image-tab-heading' className={styles.title}>
-            {IMAGE_TAB_CONTENT.title}
-          </h2>
-          <p className={styles.subtitle}>{IMAGE_TAB_CONTENT.description}</p>
-        </header>
-
         <div className={styles.tabNavigation}>
-          <ul className={styles.tabList} role='tablist' aria-label='탭 영역 이미지 전환'>
-            {TAB_LIST.map((tab) => {
-              const isActive = activeTab.id === tab.id;
+          <ul className={styles.tabList} role='tablist' aria-label='이미지 탭 전환'>
+            {DEMO_TABS.map((tab) => {
+              const isActive = tab.id === activeTab.id;
               return (
                 <li
                   key={tab.id}
@@ -104,7 +93,9 @@ export const ImageTab = ({ defaultActiveTabId = 'tab1', onTabChange }: ImageTabP
               <img src={activeTab.imageSrc} alt={activeTab.caption} loading='lazy' />
               <div className={styles.imageOverlay} aria-hidden='true' />
             </div>
-            <figcaption className='sr-only'>{activeTab.caption}</figcaption>
+            <figcaption className={styles.caption}>
+              <strong>{activeTab.caption}</strong>
+            </figcaption>
           </figure>
         </section>
       </div>
