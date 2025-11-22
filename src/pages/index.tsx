@@ -1,4 +1,5 @@
 import { Hero } from '@/commons/components/landing/Hero';
+import { ImageSlider } from '@/commons/components/landing/ImageSlider';
 import { ImageTab } from '@/commons/components/landing/ImageTab';
 import { Video } from '@/commons/components/landing/Video';
 import Head from 'next/head';
@@ -31,6 +32,7 @@ export default function Home() {
       <Hero />
       <Video />
       <ImageTab />
+      <ImageSlider />
     </>
   );
 }
