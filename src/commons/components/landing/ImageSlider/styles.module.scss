@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   background-color: #dfecc6;
+  overflow-x: clip; // 슬라이더가 넘칠 때 가로 스크롤 방지
 }
 
 .inner {
@@ -38,32 +39,66 @@
   }
 }
 
-.carousel {
+.carouselWrapper {
   width: 100%;
-  @include flex-col;
-  gap: 40px;
-  align-items: center;
+  position: relative;
+  padding: 0 60px; // 내비게이션 버튼을 위한 여백
+
+  // 기본 Swiper 내비게이션 커스터마이징
+  :global(.swiper-button-prev),
+  :global(.swiper-button-next) {
+    color: #485c11; // 기본 파란색 덮어쓰기
+    width: 50px; // 36px -> 50px 확대 (패딩 효과)
+    height: 50px;
+
+    // 흰색 원형 배경
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+
+    // 버튼 자체 그림자
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    filter: none;
+
+    &::after {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    // SVG 아이콘 공통 스타일
+    & > svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  :global(.swiper-button-prev) {
+    left: -70px; // 0에서 바깥쪽으로 이동
+  }
+
+  :global(.swiper-button-next) {
+    right: -70px; // 0에서 바깥쪽으로 이동
+  }
 }
 
-.viewport {
+.swiper {
   width: 100%;
-}
-
-.cardList {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  min-height: 540px;
+  padding-bottom: 50px; // 페이지네이션을 위한 여백
+  overflow: visible; // 슬라이드가 컨테이너를 넘어가도 보이도록 허용
 }
 
 .card {
-  flex: 1 1 calc((100% - 32px) / 3);
-  max-width: 360px;
+  // Swiper 슬라이드 스타일
+  height: auto;
   background-color: #ffffff;
   border-radius: 30px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  // 종횡비 또는 높이 일관성 유지
 }
 
 .imageWrapper {
@@ -108,25 +143,28 @@
   }
 }
 
+// 커스텀 페이지네이션 스타일
 .pagination {
   display: flex;
-  gap: 8px;
   justify-content: center;
-}
+  gap: 8px;
+  margin-top: 20px;
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1px solid #485c11;
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+  // Swiper 페이지네이션 불릿 타겟팅
+  :global(.swiper-pagination-bullet) {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #485c11;
+    background-color: transparent;
+    opacity: 1;
+    margin: 0 4px;
+    transition: background-color 0.2s ease;
+  }
 
-.activeDot {
-  background-color: #485c11;
+  :global(.swiper-pagination-bullet-active) {
+    background-color: #485c11;
+  }
 }
 
 @include mobile {
@@ -142,13 +180,8 @@
     font-size: 15px;
   }
 
-  .cardList {
-    flex-direction: column;
-    min-height: unset;
-  }
-
-  .card {
-    max-width: none;
+  .carouselWrapper {
+    padding: 0;
   }
 
   .cardBody {
