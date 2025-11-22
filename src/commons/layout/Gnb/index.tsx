@@ -2,6 +2,7 @@ import { Button } from '@/commons/components/ui/Button';
 import { Select } from '@/commons/components/ui/Select';
 import styles from '@/commons/layout/Gnb/styles.module.scss';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const LOGO_IMAGE_SRC = '/images/logo.svg';
 const LANGUAGE_ICON_SRC = '/icons/language-icon.svg';
@@ -19,12 +20,22 @@ const NAV_ITEMS = [
 ] as const;
 
 export default function Gnb() {
+  const [statusMessage, setStatusMessage] = useState('');
+
+  const handleLoginClick = () => {
+    setStatusMessage('');
+    setTimeout(() => {
+      setStatusMessage('로그인 기능은 현재 준비 중입니다.');
+    }, 0);
+    alert('준비 중입니다.');
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.navigation} aria-label='Global Navigation'>
         <div className={styles.branding}>
           <Link href='/' className={styles.logo} aria-label='Syntekabio 홈'>
-            <img src={LOGO_IMAGE_SRC} alt='Syntekabio' />
+            <img src={LOGO_IMAGE_SRC} alt='Syntekabio 로고' />
           </Link>
 
           <ul className={styles.menu} role='list'>
@@ -48,7 +59,12 @@ export default function Gnb() {
             options={[...LANGUAGE_OPTIONS]}
           />
 
-          <Button type='button'>Login</Button>
+          <span className='sr-only' aria-live='polite' role='status'>
+            {statusMessage}
+          </span>
+          <Button type='button' onClick={handleLoginClick}>
+            Login
+          </Button>
         </div>
       </nav>
     </header>

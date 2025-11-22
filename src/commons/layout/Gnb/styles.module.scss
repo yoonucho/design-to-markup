@@ -61,8 +61,7 @@ $header-height: 56px;
   margin-left: auto;
 }
 
-/* Button/Select styles are handled within their own UI modules */
-
+/* 모바일 환경 스타일 */
 @include mobile {
   .navigation {
     flex-direction: column;
