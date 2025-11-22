@@ -8,20 +8,15 @@ import {
   VIDEO_SECTION_COVER_MOBILE_SRC,
   VIDEO_SECTION_COVER_SRC,
 } from '@/commons/constants/images';
-import { useVideoAutoPlay } from '@/commons/hooks/useVideoAutoPlay';
-
 export const Video = () => {
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
+  const [shouldMute, setShouldMute] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const hasAutoPlayedRef = useRef(false); // 자동 재생 여부 추적
-
-  // 스크롤 시 자동 재생 감지
-  const { sectionRef, shouldAutoPlay } = useVideoAutoPlay({
-    threshold: 0.5, // 섹션의 50%가 보일 때 활성화
-    enabled: true,
-  });
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const hasAutoPlayedRef = useRef(false);
 
   const handleActivatePlayer = useCallback(() => {
+    setShouldMute(false);
     setIsPlayerVisible(true);
   }, []);
 
@@ -30,13 +25,29 @@ export const Video = () => {
     setIsPlayerVisible(false);
   }, []);
 
-  // 스크롤로 섹션 진입 시 자동 재생 (한 번만)
+  // 스크롤로 섹션 진입 시 자동 재생 (GNB와 동일한 기준 offset 80px)
   useEffect(() => {
-    if (shouldAutoPlay && !isPlayerVisible && !hasAutoPlayedRef.current) {
-      setIsPlayerVisible(true);
-      hasAutoPlayedRef.current = true; // 자동 재생 완료 표시
-    }
-  }, [shouldAutoPlay, isPlayerVisible]);
+    const handleScroll = () => {
+      if (!sectionRef.current || hasAutoPlayedRef.current) return;
+
+      const OFFSET = 80;
+      const sectionTop = sectionRef.current.offsetTop;
+      const triggerPosition = window.scrollY + OFFSET;
+
+      if (triggerPosition >= sectionTop) {
+        setShouldMute(true);
+        setIsPlayerVisible(true);
+        hasAutoPlayedRef.current = true;
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (isPlayerVisible && videoRef.current) {
@@ -70,6 +81,7 @@ export const Video = () => {
                 playsInline
                 preload='auto'
                 controls
+                muted={shouldMute}
                 onEnded={handleVideoEnded}
               />
             ) : (
