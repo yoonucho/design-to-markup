@@ -101,7 +101,7 @@ export const Video = () => {
                 <PlayButton
                   size='small'
                   className={styles.playButton}
-                  aria-controls='promo-video'
+                  aria-controls={isPlayerVisible ? 'promo-video' : undefined}
                   onClick={handleActivatePlayer}
                   srLabel='영상 재생'
                   showCircle
