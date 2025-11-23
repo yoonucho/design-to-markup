@@ -179,7 +179,7 @@ git mv를 두 번 사용해 video → Video로 명시적으로 변경
 
 ### 사용 가능한 스크립트
 
--   `yarn storybook`: Storybook을 실행합니다. (http://localhost:6006)
--   `yarn storybook:build`: Storybook을 정적 파일로 빌드합니다.
--   `yarn dev`: 로컬에서 프로젝트를 실행합니다.
+`yarn storybook`: Storybook을 실행합니다. (http://localhost:6006)
+`yarn storybook:build`: Storybook을 정적 파일로 빌드합니다.
+`yarn dev`: 로컬에서 프로젝트를 실행합니다.
 
