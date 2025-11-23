@@ -8,7 +8,6 @@ $header-height: 56px;
   top: 0;
   left: 0;
   right: 0;
-  width: 100%;
   padding: 0 24px;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
@@ -123,14 +122,17 @@ $header-height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    padding: 0;
     background: transparent;
     border: none;
     cursor: pointer;
 
     img {
-      width: 100%;
-      height: 100%;
+      width: 18px;
+      height: 12px;
     }
   }
 }
@@ -150,19 +152,35 @@ $header-height: 56px;
 
   .navigation {
     height: $header-height;
+    gap: 0;
+    overflow: hidden;
   }
 
   /* 데스크탑 요소 숨김 */
   .branding {
     gap: 0;
+    flex: 0 0 auto;
+    width: auto;
   }
 
   .menu {
-    display: none;
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .actions {
-    display: none;
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   /* 모바일 전체 화면 오버레이 */
