@@ -69,3 +69,183 @@ UI 구현 역량을 확인하기 위한 과제입니다.
 
     # 2단계: 최종 이름으로 다시 이동
     git mv src/commons/components/landing/video_tmp src/commons/components/landing/Video
+```
+
+### 구조도
+
+<details>
+<summary>📁 프로젝트 구조도</summary>
+
+```txt
+src
+├─ commons
+│  ├─ components
+│  │  ├─ landing
+│  │  │  ├─ Hero
+│  │  │  │  ├─ index.tsx
+│  │  │  │  └─ styles.module.scss
+│  │  │  ├─ ImageSlider
+│  │  │  │  ├─ index.tsx
+│  │  │  │  └─ styles.module.scss
+│  │  │  ├─ ImageTab
+│  │  │  │  ├─ index.tsx
+│  │  │  │  ├─ logic.ts
+│  │  │  │  └─ styles.module.scss
+│  │  │  └─ Video
+│  │  │     ├─ index.tsx
+│  │  │     ├─ logic.ts
+│  │  │     └─ styles.module.scss
+│  ├─ ui
+│  │  ├─ Button
+│  │  ├─ ImageSlider
+│  │  ├─ ImageTab
+│  │  ├─ PlayButton
+│  │  ├─ PlayIcon
+│  │  ├─ Select
+│  │  └─ SkipLink
+│
+├─ constants
+│  ├─ globalConstants.ts
+│  ├─ images.ts
+│  └─ types.ts
+│
+├─ hooks
+│  ├─ useImageTab.ts
+│  ├─ useLoginNotice.ts
+│  ├─ useScrollSpy.ts
+│  └─ useVideoAutoPlay.ts
+│
+├─ layout
+│  ├─ Gnb
+│  │  ├─ index.tsx
+│  │  ├─ logic.ts
+│  │  └─ styles.module.scss
+│  ├─ index.tsx
+│  └─ styles.module.scss
+│
+├─ pages
+│  ├─ _app.tsx
+│  ├─ _document.tsx
+│  └─ index.tsx
+│
+├─ stories
+│  ├─ Page.tsx
+│  ├─ page.interactions.ts
+│  ├─ page.module.scss
+│  └─ page.stories.ts
+│
+└─ styles
+   ├─ _mixins.scss
+   └─ globals.scss
+```
+
+</details>
+
+---
+
+
+## 웹 표준, 접근성, SEO 적용 내용
+
+### 시맨틱 마크업
+
+- **`<header>`, `<nav>`, `<main>`, `<section>`** 등 **HTML5 시맨틱 태그 활용**
+    
+- 이미지 + 캡션 영역은 **`<figure>`, `<figcaption>`** 적용
+    
+- GNB 바로 뒤에 **스킵 링크(SkipLink)** 추가하여 키보드 사용자 접근성 향상
+    
+
+### 웹 접근성(WCAG 2.1 AA)
+
+- 의미 있는 이미지에 `alt` 제공 / 장식용 이미지는 **`alt=""` 처리**
+    
+- 모든 인터랙티브 요소는 **Tab 접근 및 Enter/Space 활성화 가능**
+    
+- 탭은 ARIA 속성(`aria-label`/`expanded`/`controls` 등) 명시
+    
+
+### SEO
+
+- 단 하나의 **`<h1>` 유지**
+    
+- `<head>` 내부에 **`title`, `meta description`, `OG 태그` 구성**
+    
+- 스크린리더 전용 `sr-only H1`을 `main` 내부에 배치해 페이지 주제 확인 가능
+    
+
+### Storybook
+
+- 요구사항에 따라서 **재사용성과 협업**을 생각하며 주요 컴포넌트를 작성하였습니다.
+    
+
+---
+
+## 기술 스택
+
+- **Framework**: [Next.js 14](https://nextjs.org/)
+    
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+    
+- **Styling**: [Sass](https://sass-lang.com/) / [CSS Modules](https://github.com/css-modules/css-modules)
+    
+- **UI Components**: [Storybook](https://storybook.js.org/)
+    
+- **Linting**: [ESLint](https://eslint.org/)
+    
+- **Formatting**: [Prettier](https://prettier.io/)
+    
+- **Package Manager**: [Yarn](https://yarnpkg.com/)
+    
+
+### 추가 설치 라이브러리 목록
+
+- Image Slide 컴포넌트 구현을 위해 **`swiper": "^12.0.3`**을 설치하였습니다.
+    
+- Jest 에러 해결을 위해 라이브러리 추가 및 업데이트 등을 하였습니다.(`@types/jest": "^29.5.14`, `@types/node": "^20.11.16`)
+    
+
+---
+
+## 시작하기
+
+### 전제 조건
+
+- [Node.js](https://nodejs.org/en/) (v20.x 이상 권장)
+    
+- [Yarn](https://yarnpkg.com/getting-started/install)
+    
+
+### 설치
+
+1. 저장소를 클론합니다.
+    
+    Bash
+    
+    ```
+    git clone [본인 GitHub 저장소 URL]
+    ```
+    
+2. 프로젝트 디렉토리로 이동합니다.
+    
+    Bash
+    
+    ```
+    cd design-to-markup
+    ```
+    
+3. 의존성을 설치합니다.
+    
+    Bash
+    
+    ```
+    yarn install
+    ```
+    
+
+### 사용 가능한 스크립트
+
+- **`yarn storybook`**: Storybook을 실행합니다. (http://localhost:6006)
+    
+- **`yarn storybook:build`**: Storybook을 정적 파일로 빌드합니다.
+    
+- **`yarn dev`**: 로컬에서 프로젝트를 실행합니다.
