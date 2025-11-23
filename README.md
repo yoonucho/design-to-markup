@@ -140,8 +140,6 @@ git mv를 두 번 사용해 video → Video로 명시적으로 변경
 
 ---
 
---
-
 ## 기술 스택
 - Framework: [Next.js 14](https://nextjs.org/)
 - Language: [TypeScript](https://www.typescriptlang.org/)
@@ -184,3 +182,4 @@ git mv를 두 번 사용해 video → Video로 명시적으로 변경
 -   `yarn storybook`: Storybook을 실행합니다. (http://localhost:6006)
 -   `yarn storybook:build`: Storybook을 정적 파일로 빌드합니다.
 -   `yarn dev`: 로컬에서 프로젝트를 실행합니다.
+
