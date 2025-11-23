@@ -17,6 +17,18 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 /**
+ * 모바일 전용 네비게이션 메뉴 구조.
+ * Home과 Service 그룹을 포함합니다.
+ */
+export const MOBILE_NAV_ITEMS = {
+  home: { id: 'home', label: 'Home' },
+  serviceGroup: {
+    label: 'Service',
+    items: NAV_ITEMS,
+  },
+} as const;
+
+/**
  * 레이아웃에서 사용할 섹션 라벨 목록.
  * 접근성을 위한 aria-label에 사용됩니다.
  */

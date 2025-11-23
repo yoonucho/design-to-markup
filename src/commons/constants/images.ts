@@ -10,6 +10,16 @@ export const LOGO_IMAGE_SRC = '/images/logo.svg';
 export const LANGUAGE_ICON_SRC = '/icons/language-icon.svg';
 
 /**
+ * 모바일 GNB 햄버거 메뉴 아이콘 경로.
+ */
+export const MENU_ICON_SRC = '/icons/menu-icon.svg';
+
+/**
+ * 모바일 GNB 닫기 아이콘 경로.
+ */
+export const CLOSE_ICON_SRC = '/icons/close-icon.svg';
+
+/**
  * 랜딩 히어로 섹션에 PC용  이미지 경로.
  */
 export const HERO_DEVICE_IMAGE_SRC = '/images/hero-image.png';
