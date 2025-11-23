@@ -1,5 +1,5 @@
+import Image from 'next/image';
 import styles from './styles.module.scss';
-
 export interface SlideCardProps {
   children?: React.ReactNode;
   imageSrc?: string;
@@ -23,11 +23,10 @@ export const SlideCard = ({
     <div className={`${styles.card} ${className}`}>
       {imageSrc && (
         <div className={styles.imageWrapper}>
-          <img src={imageSrc} alt={imageAlt} loading='lazy' />
+          <Image src={imageSrc} alt={imageAlt} loading='lazy' width={460} height={436} />
         </div>
       )}
       {children && <div className={styles.cardBody}>{children}</div>}
     </div>
   );
 };
-

@@ -118,7 +118,7 @@
   }
 
   .title {
-    font-size: 3.6rem;
+    font-size: 2.8rem;
   }
 
   .subtitle {
@@ -130,27 +130,14 @@
   }
 
   .tabList {
-    flex-direction: column;
     align-items: stretch;
     border-bottom: none;
     height: auto;
     gap: 12px;
   }
 
-  .tabItem {
-    border-bottom: none;
-    border-left: 0.45rem solid transparent;
-    padding-left: 1.2rem;
-    justify-content: flex-start;
-
-    &:focus-visible {
-      outline-offset: 0.4rem;
-    }
-  }
-
   .tabButton {
-    text-align: left;
-    padding-bottom: 0.8rem;
+    font-size: 1.5rem;
   }
 
   .active {
@@ -166,4 +153,3 @@
     border-radius: 2rem;
   }
 }
-

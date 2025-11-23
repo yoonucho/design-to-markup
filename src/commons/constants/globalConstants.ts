@@ -2,6 +2,7 @@ import {
   HERO_DEVICE_IMAGE_MOBILE_SRC,
   HERO_DEVICE_IMAGE_SRC,
   IMAGE_TAB_SOURCES,
+  IMAGE_TAB_SOURCES_MOBILE,
 } from '@/commons/constants/images';
 import type { ImageTabContent, NavItem, SelectOption, SliderItem } from '@/commons/constants/types';
 
@@ -98,18 +99,21 @@ export const TAB_LIST: ImageTabContent[] = [
     id: 'tab1',
     label: '탭 영역 1',
     imageSrc: IMAGE_TAB_SOURCES.AREA_ONE,
+    imageSrcMobile: IMAGE_TAB_SOURCES_MOBILE.AREA_ONE,
     caption: '첫번째 탭 이미지',
   },
   {
     id: 'tab2',
     label: '탭 영역 2',
     imageSrc: IMAGE_TAB_SOURCES.AREA_TWO,
+    imageSrcMobile: IMAGE_TAB_SOURCES_MOBILE.AREA_TWO,
     caption: '두번째 탭 이미지',
   },
   {
     id: 'tab3',
     label: '탭 영역 3',
     imageSrc: IMAGE_TAB_SOURCES.AREA_THREE,
+    imageSrcMobile: IMAGE_TAB_SOURCES_MOBILE.AREA_THREE,
     caption: '세번째 탭 이미지',
   },
 ];

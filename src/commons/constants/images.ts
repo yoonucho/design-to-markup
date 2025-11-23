@@ -1,6 +1,6 @@
 /**
  * 브랜드 로고 이미지 경로.
- * 헤더, 푸터 등 전역에서 동일한 자산을 사용하도록 통일합니다.
+ * 헤더, 푸터 등 전역에서 동일한 이미지를 사용하도록 통일합니다.
  */
 export const LOGO_IMAGE_SRC = '/images/logo.svg';
 
@@ -47,4 +47,13 @@ export const IMAGE_TAB_SOURCES = {
   AREA_ONE: '/images/Image-tab1.png',
   AREA_TWO: '/images/Image-tab2.png',
   AREA_THREE: '/images/Image-tab3.png',
+} as const;
+
+/**
+ * 랜딩 페이지 이미지 탭 모바일 이미지 경로.
+ */
+export const IMAGE_TAB_SOURCES_MOBILE = {
+  AREA_ONE: '/images/mo/Image-tab1-m.png',
+  AREA_TWO: '/images/mo/Image-tab2-m.png',
+  AREA_THREE: '/images/mo/Image-tab3-m.png',
 } as const;

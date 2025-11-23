@@ -34,7 +34,7 @@ export const ImageSlider = () => {
         >
           {SLIDER_ITEMS.map((item) => (
             <SlideCard key={item.id} imageSrc={item.imageSrc} imageAlt={item.imageAlt}>
-              <p className={styles.cardHeading}>{item.title}</p>
+              <h3 className={styles.cardHeading}>{item.title}</h3>
               <div className={styles.cardDescription}>
                 {item.description.map((line, index) => (
                   <p key={`${item.id}-desc-${index}`}>{line}</p>

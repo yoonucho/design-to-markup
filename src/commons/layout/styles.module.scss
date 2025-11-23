@@ -47,7 +47,7 @@ $gnb-height: 56px;
 /* 모바일 환경 스타일 */
 @include mobile {
   .main {
-    padding: calc(72px + 80px) 0 80px;
+    padding-top: calc(80px + $gnb-height);
   }
 
   .emptyState {

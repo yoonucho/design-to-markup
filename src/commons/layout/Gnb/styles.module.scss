@@ -34,6 +34,7 @@ $header-height: 56px;
   display: inline-flex;
   width: 109px;
   height: 22px;
+  flex-shrink: 0;
 
   img {
     width: 100%;
@@ -114,17 +115,15 @@ $header-height: 56px;
   margin-left: auto;
 }
 
-/* 햄버거 메뉴 아이콘 (모바일 전용) */
+/* 햄버거 메뉴 아이콘 (태블릿/모바일 전용) */
 .hamburger {
   display: none;
 
-  @include mobile {
+  @media (max-width: 1024px) {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 12px;
-    padding: 0;
+    padding: 10px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -136,8 +135,8 @@ $header-height: 56px;
   }
 }
 
-/* 모바일 환경 스타일 */
-@include mobile {
+/* 태블릿/모바일 환경 스타일 */
+@media (max-width: 1024px) {
   .header {
     padding: 0 20px;
     height: $header-height;
@@ -206,6 +205,7 @@ $header-height: 56px;
     display: inline-flex;
     width: 109px;
     height: 22px;
+    flex-shrink: 0;
 
     img {
       width: 100%;
@@ -218,9 +218,7 @@ $header-height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 14px;
-    height: 14px;
-    padding: 0;
+    padding: 10px;
     background: transparent;
     border: none;
     cursor: pointer;

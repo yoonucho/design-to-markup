@@ -23,6 +23,10 @@ $breakpoint: 768px; // 모바일 전환점
 // 2. Section Base: 섹션별 상하 간격
 @mixin section-padding {
   padding-bottom: 120px;
+
+  @media (max-width: $breakpoint) {
+    padding-bottom: 80px;
+  }
 }
 
 // 3. Flex Utilities (가로/세로 중앙 정렬)
