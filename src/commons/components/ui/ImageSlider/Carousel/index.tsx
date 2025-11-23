@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -35,8 +35,26 @@ export const Carousel = ({
   equalHeight = false,
 }: CarouselProps) => {
   const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  // callback refs so we can react when the DOM nodes are attached
+  const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);
+  const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null);
+  const swiperInstanceRef = useRef<any>(null);
+  // Ensure navigation init once both swiper instance and nav elements are available
+  useEffect(() => {
+    const s = swiperInstanceRef.current;
+    if (s && navigation && prevEl && nextEl && typeof s.params.navigation !== 'boolean') {
+      // @ts-ignore
+      s.params.navigation.prevEl = prevEl;
+      // @ts-ignore
+      s.params.navigation.nextEl = nextEl;
+      try {
+        s.navigation.init();
+        s.navigation.update();
+      } catch (e) {
+        // swallow — Swiper may already be initialized; update will handle it
+      }
+    }
+  }, [prevEl, nextEl, navigation]);
 
   // children을 배열로 변환
   const childrenArray = Array.isArray(children) ? children : [children];
@@ -52,16 +70,53 @@ export const Carousel = ({
       }
     >
       {navigation && (
-        <button
-          ref={prevRef}
-          type='button'
-          className='swiper-button-prev'
-          aria-label='이전 슬라이드'
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.5 9L4.5 6L7.5 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+        <>
+          <button
+            ref={setPrevEl}
+            type='button'
+            className='swiper-button-prev'
+            aria-label='이전 슬라이드'
+          >
+            <svg
+              width='12'
+              height='12'
+              viewBox='0 0 12 12'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M7.5 9L4.5 6L7.5 3'
+                stroke='currentColor'
+                strokeWidth='1.2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </button>
+
+          <button
+            ref={setNextEl}
+            type='button'
+            className='swiper-button-next'
+            aria-label='다음 슬라이드'
+          >
+            <svg
+              width='12'
+              height='12'
+              viewBox='0 0 12 12'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M4.5 3L7.5 6L4.5 9'
+                stroke='currentColor'
+                strokeWidth='1.2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </button>
+        </>
       )}
 
       <Swiper
@@ -74,8 +129,8 @@ export const Carousel = ({
         navigation={
           navigation
             ? {
-                prevEl: prevRef.current,
-                nextEl: nextRef.current,
+                prevEl: prevEl,
+                nextEl: nextEl,
               }
             : false
         }
@@ -93,20 +148,25 @@ export const Carousel = ({
         onBeforeInit={(swiper) => {
           if (navigation && typeof swiper.params.navigation !== 'boolean') {
             // @ts-ignore
-            swiper.params.navigation.prevEl = prevRef.current;
+            swiper.params.navigation.prevEl = prevEl;
             // @ts-ignore
-            swiper.params.navigation.nextEl = nextRef.current;
+            swiper.params.navigation.nextEl = nextEl;
           }
         }}
         onSwiper={(swiper) => {
-          // Swiper 초기화 후 다시 한번 ref 연결 확인
+          // store instance and ensure navigation is initialized when elements are ready
+          swiperInstanceRef.current = swiper;
           if (navigation && typeof swiper.params.navigation !== 'boolean') {
             // @ts-ignore
-            swiper.params.navigation.prevEl = prevRef.current;
+            swiper.params.navigation.prevEl = prevEl;
             // @ts-ignore
-            swiper.params.navigation.nextEl = nextRef.current;
-            swiper.navigation.init();
-            swiper.navigation.update();
+            swiper.params.navigation.nextEl = nextEl;
+            try {
+              swiper.navigation.init();
+              swiper.navigation.update();
+            } catch (e) {
+              // ignore init errors — we'll retry from effect when refs are attached
+            }
           }
         }}
       >
@@ -117,21 +177,9 @@ export const Carousel = ({
         ))}
       </Swiper>
 
-      {navigation && (
-        <button
-          ref={nextRef}
-          type='button'
-          className='swiper-button-next'
-          aria-label='다음 슬라이드'
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-      )}
+      {/* navigation buttons rendered before Swiper via callback refs above */}
 
       {pagination && <div ref={setPaginationEl} className={styles.pagination} />}
     </div>
   );
 };
-
