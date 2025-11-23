@@ -43,3 +43,7 @@ storybook-static
 
 # idea
 .idea
+.cursor
+docs/
+prompt/
+.gitignore
