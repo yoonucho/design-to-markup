@@ -111,4 +111,16 @@
   .swiper {
     padding-bottom: 40px;
   }
+
+  .pagination {
+    gap: 12px;
+
+    :global(.swiper-pagination-bullet) {
+      width: 12px;
+      height: 12px;
+      margin: 0 6px;
+      padding: 4px;
+      cursor: pointer;
+    }
+  }
 }
