@@ -57,7 +57,11 @@ export const Carousel = ({
           type='button'
           className='swiper-button-prev'
           aria-label='이전 슬라이드'
-        />
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 9L4.5 6L7.5 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       )}
 
       <Swiper
@@ -119,7 +123,11 @@ export const Carousel = ({
           type='button'
           className='swiper-button-next'
           aria-label='다음 슬라이드'
-        />
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       )}
 
       {pagination && <div ref={setPaginationEl} className={styles.pagination} />}

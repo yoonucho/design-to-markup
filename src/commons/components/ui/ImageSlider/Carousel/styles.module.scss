@@ -23,6 +23,8 @@
     cursor: pointer;
     z-index: 10;
     margin: 0 !important;
+    border: none;
+    padding: 0;
 
     // 흰색 원형 배경
     background-color: rgba(255, 255, 255, 0.8) !important;
@@ -31,15 +33,23 @@
     // 버튼 그림자
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 
-    // Swiper 기본 화살표 색상
+    // Swiper 기본 화살표 제거
     &::after {
-      font-size: 1.4rem !important;
-      font-weight: bold !important;
-      color: #485c11 !important;
+      display: none !important;
+      content: '' !important;
+    }
+    
+    &::before {
+      display: none !important;
+      content: '' !important;
     }
 
-    & > svg {
-      color: inherit !important;
+    // SVG 화살표 스타일
+    svg {
+      width: 30px;
+      height: 30px;
+      color: #485c11;
+      flex-shrink: 0;
     }
 
     // 호버 효과
@@ -52,11 +62,6 @@
     &.swiper-button-disabled {
       opacity: 0.35 !important;
       cursor: not-allowed;
-    }
-
-    // 786px 이하에서 버튼 숨김
-    @media (max-width: 786px) {
-      display: none !important;
     }
   }
 
@@ -73,6 +78,15 @@
   width: 100%;
   padding-bottom: 50px;
   overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+
+  // 이미지 드래그 방지
+  img {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
 }
 
 // 동일 높이 옵션
@@ -111,7 +125,11 @@
     background-color: transparent;
     opacity: 1;
     margin: 0 4px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   :global(.swiper-pagination-bullet-active) {
@@ -120,19 +138,62 @@
 }
 
 @include mobile {
+  .carouselWrapper {
+    // 모바일에서 버튼 크기 조정
+    :global(.swiper-button-prev),
+    :global(.swiper-button-next) {
+      width: 40px !important;
+      height: 40px !important;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    :global(.swiper-button-prev) {
+      left: 8px !important;
+    }
+
+    :global(.swiper-button-next) {
+      right: 8px !important;
+    }
+  }
+
   .swiper {
     padding-bottom: 40px;
   }
 
   .pagination {
-    gap: 12px;
+    gap: 8px;
 
     :global(.swiper-pagination-bullet) {
-      width: 12px;
-      height: 12px;
-      margin: 0 6px;
-      padding: 4px;
+      width: 10px;
+      height: 10px;
+      margin: 0;
+      padding: 6px;
       cursor: pointer;
+      position: relative;
+      
+      // 터치 영역 확장 (최소 44x44px)
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 44px;
+        height: 44px;
+      }
+
+      // 터치 피드백
+      &:active {
+        transform: scale(1.2);
+      }
+    }
+
+    :global(.swiper-pagination-bullet-active) {
+      transform: scale(1.1);
     }
   }
 }
