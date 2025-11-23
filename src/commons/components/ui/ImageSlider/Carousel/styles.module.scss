@@ -12,48 +12,60 @@
   // Swiper 내비게이션 커스터마이징
   :global(.swiper-button-prev),
   :global(.swiper-button-next) {
-    width: 50px;
-    height: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 50px !important;
+    height: 50px !important;
     cursor: pointer;
     z-index: 10;
+    margin: 0 !important;
 
     // 흰색 원형 배경
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8) !important;
     border-radius: 50%;
 
     // 버튼 그림자
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 
-    svg {
-      width: 24px;
-      height: 24px;
-      color: var(--navigation-color);
+    // Swiper 기본 화살표 색상
+    &::after {
+      font-size: 1.4rem !important;
+      font-weight: bold !important;
+      color: #485c11 !important;
+    }
+
+    & > svg {
+      color: inherit !important;
     }
 
     // 호버 효과
     &:hover:not(.swiper-button-disabled) {
-      background-color: rgba(255, 255, 255, 1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 1) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
     }
 
     // 비활성화 상태
     &.swiper-button-disabled {
-      opacity: 0.35;
+      opacity: 0.35 !important;
       cursor: not-allowed;
     }
 
     // 786px 이하에서 버튼 숨김
     @media (max-width: 786px) {
-      display: none;
+      display: none !important;
     }
   }
 
   :global(.swiper-button-prev) {
-    left: 16px;
+    left: 16px !important;
   }
 
   :global(.swiper-button-next) {
-    right: 16px;
+    right: 16px !important;
   }
 }
 
