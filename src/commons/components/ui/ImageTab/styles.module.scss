@@ -120,7 +120,7 @@
   }
 
   .title {
-    font-size: 3.6rem;
+    font-size: 2.8rem;
   }
 
   .subtitle {
@@ -132,23 +132,22 @@
   }
 
   .tabList {
-    flex-direction: column;
     align-items: stretch;
     border-bottom: none;
     height: auto;
     gap: 12px;
   }
 
-  .tabItem {
-    border-bottom: none;
-    border-left: 0.45rem solid transparent;
-    padding-left: 1.2rem;
-    justify-content: flex-start;
+  // .tabItem {
+  //   border-bottom: none;
+  //   border-left: 0.45rem solid transparent;
+  //   padding-left: 1.2rem;
+  //   justify-content: flex-start;
 
-    &:focus-visible {
-      outline-offset: 0.4rem;
-    }
-  }
+  //   &:focus-visible {
+  //     outline-offset: 0.4rem;
+  //   }
+  // }
 
   .tabButton {
     text-align: left;

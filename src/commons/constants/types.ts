@@ -18,6 +18,7 @@ export interface ImageTabContent {
   id: string;
   label: string;
   imageSrc: string;
+  imageSrcMobile: string;
   caption: string;
 }
 

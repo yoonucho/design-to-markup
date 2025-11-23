@@ -3,7 +3,7 @@
 .carouselWrapper {
   width: 100%;
   position: relative;
-  padding: 0 60px;
+  padding: 0;
 
   // CSS 변수 기본값
   --navigation-color: #000000;
@@ -18,16 +18,22 @@
     z-index: 10;
 
     // 흰색 원형 배경
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
 
     // 버튼 그림자
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
     svg {
       width: 24px;
       height: 24px;
       color: var(--navigation-color);
+    }
+
+    // 호버 효과
+    &:hover:not(.swiper-button-disabled) {
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     // 비활성화 상태
@@ -36,17 +42,18 @@
       cursor: not-allowed;
     }
 
-    @include mobile {
+    // 786px 이하에서 버튼 숨김
+    @media (max-width: 786px) {
       display: none;
     }
   }
 
   :global(.swiper-button-prev) {
-    left: -70px;
+    left: 16px;
   }
 
   :global(.swiper-button-next) {
-    right: -70px;
+    right: 16px;
   }
 }
 
@@ -101,7 +108,7 @@
 }
 
 @include mobile {
-  .carouselWrapper {
-    padding: 0;
+  .swiper {
+    padding-bottom: 40px;
   }
 }

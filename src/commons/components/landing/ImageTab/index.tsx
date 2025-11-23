@@ -1,5 +1,7 @@
 import { KeyboardEvent } from 'react';
 
+import Image from 'next/image';
+
 import styles from '@/commons/components/landing/ImageTab/styles.module.scss';
 import { IMAGE_TAB_CONTENT, TAB_LIST } from '@/commons/constants/globalConstants';
 import { useImageTab } from '@/commons/hooks/useImageTab';
@@ -68,7 +70,16 @@ export const ImageTab = ({ defaultActiveTabId = 'tab1', onTabChange }: ImageTabP
         >
           <figure className={styles.figure}>
             <div className={styles.imageWrapper}>
-              <img src={activeTab.imageSrc} alt={activeTab.caption} loading='lazy' />
+              <picture>
+                <source media='(max-width: 768px)' srcSet={activeTab.imageSrcMobile} />
+                <Image
+                  src={activeTab.imageSrc}
+                  alt={activeTab.caption}
+                  fill
+                  sizes='(max-width: 768px) 100vw, 1100px'
+                  priority={activeTab.id === 'tab1'}
+                />
+              </picture>
               <div className={styles.imageOverlay} aria-hidden='true' />
             </div>
             <figcaption className='sr-only'>{activeTab.caption}</figcaption>

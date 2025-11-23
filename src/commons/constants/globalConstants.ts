@@ -2,6 +2,7 @@ import {
   HERO_DEVICE_IMAGE_MOBILE_SRC,
   HERO_DEVICE_IMAGE_SRC,
   IMAGE_TAB_SOURCES,
+  IMAGE_TAB_SOURCES_MOBILE,
 } from '@/commons/constants/images';
 import type { ImageTabContent, NavItem, SelectOption, SliderItem } from '@/commons/constants/types';
 
@@ -15,6 +16,18 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'image-tab', label: 'Image tab section' },
   { id: 'image-slider', label: 'Image slider section' },
 ];
+
+/**
+ * 모바일 전용 네비게이션 메뉴 구조.
+ * Home과 Service 그룹을 포함합니다.
+ */
+export const MOBILE_NAV_ITEMS = {
+  home: { id: 'home', label: 'Home' },
+  serviceGroup: {
+    label: 'Service',
+    items: NAV_ITEMS,
+  },
+} as const;
 
 /**
  * 레이아웃에서 사용할 섹션 라벨 목록.
@@ -86,18 +99,21 @@ export const TAB_LIST: ImageTabContent[] = [
     id: 'tab1',
     label: '탭 영역 1',
     imageSrc: IMAGE_TAB_SOURCES.AREA_ONE,
+    imageSrcMobile: IMAGE_TAB_SOURCES_MOBILE.AREA_ONE,
     caption: '첫번째 탭 이미지',
   },
   {
     id: 'tab2',
     label: '탭 영역 2',
     imageSrc: IMAGE_TAB_SOURCES.AREA_TWO,
+    imageSrcMobile: IMAGE_TAB_SOURCES_MOBILE.AREA_TWO,
     caption: '두번째 탭 이미지',
   },
   {
     id: 'tab3',
     label: '탭 영역 3',
     imageSrc: IMAGE_TAB_SOURCES.AREA_THREE,
+    imageSrcMobile: IMAGE_TAB_SOURCES_MOBILE.AREA_THREE,
     caption: '세번째 탭 이미지',
   },
 ];
